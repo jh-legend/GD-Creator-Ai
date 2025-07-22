@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/Chatwithai"
+        android:title="Chat with AI"
+        android:icon="@drawable/logo_ai_chat"
+        android:iconTint="@color/black"
+        >
+
+    </item>
+
+    <item
+        android:id="@+id/DownloadedDocs"
+        android:title="Downloaded Docs"
+        android:icon="@drawable/logo_downloaded_docs"
+        android:iconTint="@color/black"
+        >
+
+    </item>
+
+
+    <item
+        android:id="@+id/setting"
+        android:title="Setting"
+        android:icon="@drawable/logo_setting_icon"
+        android:iconTint="@color/black"
+        >
+
+    </item>
+
+</menu>
