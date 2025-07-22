@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/Chatwithai"
+        android:id="@+id/chatFragment"
         android:title="Chat with AI"
         android:icon="@drawable/logo_ai_chat"
         android:iconTint="@color/black"
@@ -11,7 +11,7 @@
     </item>
 
     <item
-        android:id="@+id/DownloadedDocs"
+        android:id="@+id/docsFragment"
         android:title="Downloaded Docs"
         android:icon="@drawable/logo_downloaded_docs"
         android:iconTint="@color/black"
@@ -21,7 +21,7 @@
 
 
     <item
-        android:id="@+id/setting"
+        android:id="@+id/settingFragment"
         android:title="Setting"
         android:icon="@drawable/logo_setting_icon"
         android:iconTint="@color/black"

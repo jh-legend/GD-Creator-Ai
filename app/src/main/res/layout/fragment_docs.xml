@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DocsFragment"
-    android:id="@+id/DocsFragment"
+    tools:context=".DocsFragment">
 
-    >
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/docsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/noDocsTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Here will show all of GD created by this app on their Devic"
-        android:textSize="30sp"
-        android:padding="30sp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/dark_rustic_brown"
-        >
+        android:text="No downloaded documents found."
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
-    </TextView>
-
-
-</FrameLayout>
+</RelativeLayout>
