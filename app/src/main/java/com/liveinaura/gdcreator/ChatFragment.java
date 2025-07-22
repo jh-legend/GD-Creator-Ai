@@ -101,10 +101,20 @@ public class ChatFragment extends Fragment {
         messageEditText.setText("");
         progressBar.setVisibility(View.VISIBLE);
 
+        // Create a prompt for the AI
+        String prompt = "The user wants to file a General Diary (GD) in Bangladesh. " +
+                "The user's initial statement is: \"" + messageText + "\". " +
+                "Please ask clarifying questions to gather all the necessary information for a GD, " +
+                "such as the user's name, father's name, address, the type of incident (e.g., lost item, threat), " +
+                "date and time of the incident, location of the incident, description of the incident, " +
+                "and any other relevant details. After gathering all the information, " +
+                "generate a formal GD in Bengali.";
+
+
         CompletionRequest request = new CompletionRequest(
                 "text-davinci-003",
-                messageText,
-                150
+                prompt,
+                500
         );
 
         openAiApiService.getCompletion("Bearer " + OPENAI_API_KEY, request).enqueue(new Callback<CompletionResponse>() {
@@ -116,6 +126,10 @@ public class ChatFragment extends Fragment {
                     messageList.add(new Message(aiResponse, false));
                     chatAdapter.notifyItemInserted(messageList.size() - 1);
                     chatRecyclerView.scrollToPosition(messageList.size() - 1);
+                    // Show the download button when the AI provides a response
+                    if (aiResponse.toLowerCase().contains("general diary")) {
+                        downloadButton.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     Toast.makeText(getContext(), "Failed to get response from AI", Toast.LENGTH_SHORT).show();
                 }
