@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.liveinaura.gdcreator.models.User;
 import com.liveinaura.gdcreator.services.FirebaseService;
 import com.liveinaura.gdcreator.utils.ThemeUtils;
+import com.liveinaura.gdcreator.LoginActivity;
 
 public class SettingFragment extends Fragment {
 

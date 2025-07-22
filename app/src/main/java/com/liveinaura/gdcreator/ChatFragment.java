@@ -21,6 +21,10 @@ import com.liveinaura.gdcreator.api.OpenAiApiService;
 import com.liveinaura.gdcreator.models.Message;
 import com.liveinaura.gdcreator.models.request.CompletionRequest;
 import com.liveinaura.gdcreator.models.response.CompletionResponse;
+import com.liveinaura.gdcreator.utils.PermissionUtils;
+import com.liveinaura.gdcreator.utils.PdfGenerator;
+import android.content.pm.PackageManager;
+
 
 import java.util.ArrayList;
 import java.util.List;

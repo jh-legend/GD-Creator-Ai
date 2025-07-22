@@ -18,8 +18,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.PackageManager;
+
 import com.liveinaura.gdcreator.adapters.DocsAdapter;
 import com.liveinaura.gdcreator.models.Doc;
+import com.liveinaura.gdcreator.utils.PermissionUtils;
 
 import java.io.File;
 import java.util.ArrayList;

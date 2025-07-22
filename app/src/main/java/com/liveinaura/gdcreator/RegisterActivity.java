@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.liveinaura.gdcreator.models.User;
+import com.liveinaura.gdcreator.MainActivity;
 
 import java.util.Date;
 

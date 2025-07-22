@@ -30,7 +30,7 @@ public class PdfGenerator {
         document.open();
 
         // Add the Bengali font
-        BaseFont bf = BaseFont.createFont("assets/fonts/kalpurush.ttf", BaseFont.IDENTITY_H, Base.EMBEDDED);
+        BaseFont bf = BaseFont.createFont("assets/fonts/kalpurush.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         Font font = new Font(bf, 12);
 
         // Add the GD text to the document
