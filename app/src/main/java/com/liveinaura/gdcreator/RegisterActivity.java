@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.liveinaura.gdcreator.models.User;
 import com.liveinaura.gdcreator.MainActivity;
+import com.liveinaura.gdcreator.utils.ValidationUtils;
 
 import java.util.Date;
 

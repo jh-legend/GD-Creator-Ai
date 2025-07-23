@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.liveinaura.gdcreator.databinding.ActivityMainBinding;
+import com.liveinaura.gdcreator.utils.ThemeUtils;
 import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {

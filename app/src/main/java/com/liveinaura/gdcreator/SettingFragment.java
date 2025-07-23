@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.liveinaura.gdcreator.models.User;
 import com.liveinaura.gdcreator.services.FirebaseService;
+import android.net.Uri;
+import androidx.appcompat.app.AlertDialog;
 import com.liveinaura.gdcreator.utils.ThemeUtils;
 import com.liveinaura.gdcreator.LoginActivity;
 
