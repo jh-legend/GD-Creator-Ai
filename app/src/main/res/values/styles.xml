@@ -52,4 +52,9 @@
         <item name="boxBackgroundColor">?attr/colorSurface</item>
     </style>
 
+    <style name="ThemeAwareEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+    </style>
+
 </resources>
