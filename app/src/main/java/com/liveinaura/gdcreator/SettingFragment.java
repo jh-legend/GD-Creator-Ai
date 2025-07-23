@@ -89,6 +89,12 @@ public class SettingFragment extends Fragment {
                     .show();
         });
 
+        view.findViewById(R.id.termsOfUseTextView).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), WebViewActivity.class);
+            intent.putExtra("url", "https://liveinaura.com/terms-of-use");
+            startActivity(intent);
+        });
+
         return view;
     }
 
