@@ -27,6 +27,7 @@ public class SettingFragment extends Fragment {
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView subscriptionStatusTextView;
+    private SwitchMaterial themeSwitch;
     private Button logoutButton;
 
     private FirebaseService firebaseService;
@@ -39,11 +40,21 @@ public class SettingFragment extends Fragment {
         nameTextView = view.findViewById(R.id.nameTextView);
         emailTextView = view.findViewById(R.id.emailTextView);
         subscriptionStatusTextView = view.findViewById(R.id.subscriptionStatusTextView);
+        themeSwitch = view.findViewById(R.id.themeSwitch);
         logoutButton = view.findViewById(R.id.logoutButton);
 
         firebaseService = new FirebaseService();
 
         loadUserData();
+
+        themeSwitch.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
+        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                ThemeUtils.setTheme(getContext(), AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                ThemeUtils.setTheme(getContext(), AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
 
         logoutButton.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();

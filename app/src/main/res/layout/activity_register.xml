@@ -17,13 +17,12 @@
         android:layout_marginBottom="32dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/ThemeAwareInputStyle"
+        style="@style/InputThemeStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nameEditText"
-            style="@style/ThemeAwareEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
@@ -31,14 +30,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/ThemeAwareInputStyle"
+        style="@style/InputThemeStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEditText"
-            style="@style/ThemeAwareEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
@@ -46,14 +44,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/ThemeAwareInputStyle"
+        style="@style/InputThemeStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
-            style="@style/ThemeAwareEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
