@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.GDCreator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.GDCreator" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/send_button_green</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:statusBarColor">@color/app_background</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/app_background</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
