@@ -62,16 +62,26 @@ public class RegisterActivity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
-                            String uid = mAuth.getCurrentUser().getUid();
-                            User user = new User(name, email, "TRIAL", new com.google.firebase.Timestamp(new Date()), null, null);
-                            mDb.collection("users").document(uid).set(user)
+                            mAuth.getCurrentUser().sendEmailVerification()
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                            startActivity(intent);
-                                            finish();
+                                            String uid = mAuth.getCurrentUser().getUid();
+                                            User user = new User(name, email, "TRIAL", new com.google.firebase.Timestamp(new Date()), null, null);
+                                            mDb.collection("users").document(uid).set(user)
+                                                    .addOnCompleteListener(task2 -> {
+                                                        if (task2.isSuccessful()) {
+                                                            Toast.makeText(RegisterActivity.this, "Registration successful. Please verify your email.", Toast.LENGTH_LONG).show();
+                                                            mAuth.signOut();
+                                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        } else {
+                                                            Toast.makeText(RegisterActivity.this, "Failed to save user data.",
+                                                                    Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                         } else {
-                                            Toast.makeText(RegisterActivity.this, "Failed to save user data.",
+                                            Toast.makeText(RegisterActivity.this, "Failed to send verification email.",
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     });

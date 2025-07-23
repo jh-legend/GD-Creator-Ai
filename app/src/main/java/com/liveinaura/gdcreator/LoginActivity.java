@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private TextView registerTextView;
+    private TextView resendVerificationTextView;
 
     private FirebaseAuth mAuth;
 
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerTextView = findViewById(R.id.registerTextView);
+        resendVerificationTextView = findViewById(R.id.resendVerificationTextView);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -50,9 +52,15 @@ public class LoginActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            if (mAuth.getCurrentUser().isEmailVerified()) {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                mAuth.signOut();
+                                Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
+                                resendVerificationTextView.setVisibility(TextView.VISIBLE);
+                            }
                         } else {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -63,6 +71,17 @@ public class LoginActivity extends AppCompatActivity {
         registerTextView.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
+        });
+
+        resendVerificationTextView.setOnClickListener(v -> {
+            mAuth.getCurrentUser().sendEmailVerification()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Verification email sent.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
     }
 }

@@ -59,4 +59,14 @@
         android:layout_marginTop="16dp"
         android:text="Don't have an account? Register here." />
 
+    <TextView
+        android:id="@+id/resendVerificationTextView"
+        style="@style/BodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Resend verification email"
+        android:visibility="gone"
+        android:textColor="@color/user_message_bubble" />
+
 </LinearLayout>
