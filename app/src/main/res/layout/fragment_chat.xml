@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ChatFragment"
-    android:id="@+id/fragmentChat"
-    android:orientation="vertical">
+    android:background="@color/app_background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
@@ -14,7 +13,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/inputLayout"
         android:padding="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:clipToPadding="false" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -29,21 +29,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:gravity="center_vertical">
 
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message"
+            android:hint="Type a message..."
+            android:background="@drawable/input_field_background"
+            android:padding="12dp"
+            android:textColor="@color/ai_message_text"
+            android:textColorHint="#B0B0B0"
             android:inputType="text" />
 
-        <Button
+        <ImageButton
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_send"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/send_button_green"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
     <Button

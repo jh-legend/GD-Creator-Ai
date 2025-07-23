@@ -37,7 +37,7 @@ public class ChatFragment extends Fragment {
 
     private RecyclerView chatRecyclerView;
     private EditText messageEditText;
-    private Button sendButton;
+    private ImageButton sendButton;
     private ProgressBar progressBar;
     private Button downloadButton;
 
@@ -98,6 +98,7 @@ public class ChatFragment extends Fragment {
     private void sendMessage(String messageText) {
         messageList.add(new Message(messageText, true));
         chatAdapter.notifyItemInserted(messageList.size() - 1);
+        chatRecyclerView.scrollToPosition(messageList.size() - 1);
         messageEditText.setText("");
         progressBar.setVisibility(View.VISIBLE);
 

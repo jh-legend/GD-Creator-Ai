@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="64dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
     android:gravity="start">
 
     <TextView
@@ -12,6 +15,17 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ai_message_background"
         android:padding="12dp"
-        android:textColor="@android:color/black" />
+        android:elevation="4dp"
+        android:textColor="@color/ai_message_text" />
+
+    <TextView
+        android:id="@+id/aiNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GD Assistant"
+        android:textSize="12sp"
+        android:textColor="#B0B0B0"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"/>
 
 </LinearLayout>
