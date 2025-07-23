@@ -63,6 +63,32 @@ public class SettingFragment extends Fragment {
             startActivity(intent);
         });
 
+        view.findViewById(R.id.privacyPolicyTextView).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), WebViewActivity.class);
+            intent.putExtra("url", "https://liveinaura.com/privacy-policy");
+            startActivity(intent);
+        });
+
+        view.findViewById(R.id.contactUsTextView).setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@liveinaura.com"});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Support Request - GD Creator App");
+            startActivity(Intent.createChooser(intent, "Send Email"));
+        });
+
+        view.findViewById(R.id.deleteDataTextView).setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Delete Your Data")
+                    .setMessage("Do you want to request deletion of your account and all related data?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // TODO: Trigger Firebase function to handle deletion request
+                        Toast.makeText(getContext(), "Deletion request sent.", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        });
+
         return view;
     }
 

@@ -43,8 +43,18 @@ public class RegisterActivity extends AppCompatActivity {
             String email = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            if (name.isEmpty()) {
+                nameEditText.setError("Name is required");
+                return;
+            }
+
+            if (!ValidationUtils.isValidEmail(email)) {
+                emailEditText.setError("Please enter a valid email address like name@email.com");
+                return;
+            }
+
+            if (!ValidationUtils.isValidPassword(password)) {
+                passwordEditText.setError("Password must be at least 6 characters with 2 numbers and 2 special characters.");
                 return;
             }
 
