@@ -7,21 +7,17 @@
     <color name="sunshine_yellow">#edd429</color>
     <color name="warm_beige">#cdbcb8</color>
     <color name="peach_cream">#eed0c1</color>
-    <color name="ocean_sage_green">#689a90</color>
-
-    <!-- New Chat UI Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green">#00FF7F</color>
     <color name="app_background">#FFFFFF</color>
-    <color name="user_message_bubble">#1F8EF1</color>
-    <color name="ai_message_bubble">#F0F0F0</color>
-    <color name="ai_message_text">#000000</color>
-    <color name="input_field_background">#FFFFFF</color>
-    <color name="send_button_green">#00C851</color>
     <color name="textColorPrimary">#000000</color>
     <color name="textColorSecondary">#666666</color>
+    <color name="colorPrimary">@color/green</color>
+    <color name="colorOnPrimary">@color/white</color>
     <color name="colorSurface">#FFFFFF</color>
     <color name="colorOnSurface">#000000</color>
     <color name="colorOnSurfaceVariant">#666666</color>
-    <color name="colorPrimary">#00FF7F</color>
 
 
 </resources>

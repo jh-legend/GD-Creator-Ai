@@ -16,7 +16,7 @@
         android:background="@drawable/ai_message_background"
         android:padding="12dp"
         android:elevation="4dp"
-        android:textColor="@color/ai_message_text" />
+        android:textColor="?attr/colorOnSurface" />
 
     <TextView
         android:id="@+id/aiNameTextView"

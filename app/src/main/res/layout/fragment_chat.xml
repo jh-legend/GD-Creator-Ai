@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Type a message..."
-            android:textColor="@color/ai_message_text"
             android:inputType="text" />
 
         <ImageButton
@@ -48,7 +47,7 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_send"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/send_button_green"
+            android:tint="?attr/colorPrimary"
             android:layout_marginStart="8dp" />
     </LinearLayout>
 

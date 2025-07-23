@@ -16,6 +16,6 @@
         android:background="@drawable/user_message_background"
         android:padding="12dp"
         android:elevation="4dp"
-        android:textColor="@android:color/white" />
+        android:textColor="?attr/colorOnPrimary" />
 
 </LinearLayout>
