@@ -34,14 +34,12 @@
 
         <EditText
             android:id="@+id/messageEditText"
+            style="@style/AppEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Type a message..."
-            android:background="@drawable/input_field_background"
-            android:padding="12dp"
             android:textColor="@color/ai_message_text"
-            android:textColorHint="#B0B0B0"
             android:inputType="text" />
 
         <ImageButton

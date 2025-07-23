@@ -34,4 +34,11 @@
         <item name="cardElevation">4dp</item>
     </style>
 
+    <!-- EditText Style -->
+    <style name="AppEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/edittext_background_dark</item>
+        <item name="android:textColorHint">#E0E0E0</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
 </resources>
