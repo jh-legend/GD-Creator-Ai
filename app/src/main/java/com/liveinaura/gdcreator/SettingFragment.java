@@ -21,11 +21,8 @@ import com.liveinaura.gdcreator.models.User;
 import com.liveinaura.gdcreator.services.FirebaseService;
 import android.net.Uri;
 import androidx.appcompat.app.AlertDialog;
-import com.pranavpandey.android.dynamic.theme.Theme;
-import com.pranavpandey.android.dynamic.theme.ThemeManager;
+import com.liveinaura.gdcreator.utils.ThemeUtils;
 import com.liveinaura.gdcreator.LoginActivity;
-
-public class SettingFragment extends Fragment {
 
     private TextView nameTextView;
     private TextView emailTextView;
@@ -50,9 +47,13 @@ public class SettingFragment extends Fragment {
 
         loadUserData();
 
-        themeSwitch.setChecked(ThemeManager.getInstance().isDarkTheme());
+        themeSwitch.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
         themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            ThemeManager.getInstance().setTheme(isChecked ? Theme.DARK : Theme.LIGHT);
+            if (isChecked) {
+                ThemeUtils.setTheme(getContext(), AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                ThemeUtils.setTheme(getContext(), AppCompatDelegate.MODE_NIGHT_NO);
+            }
             getActivity().recreate();
         });
 

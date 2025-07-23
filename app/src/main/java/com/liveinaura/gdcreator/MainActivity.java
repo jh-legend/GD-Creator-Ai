@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.liveinaura.gdcreator.databinding.ActivityMainBinding;
 import android.content.Intent;
-import com.pranavpandey.android.dynamic.theme.Theme;
+import com.liveinaura.gdcreator.utils.ThemeUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.applyTheme(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
