@@ -8,9 +8,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.liveinaura.gdcreator.databinding.ActivityMainBinding;
-import com.liveinaura.gdcreator.utils.ThemeUtils;
 import android.content.Intent;
+import com.pranavpandey.android.dynamic.theme.Theme;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtils.applyTheme(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

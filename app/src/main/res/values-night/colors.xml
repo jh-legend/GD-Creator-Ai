@@ -2,12 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#00FF7F</color>
+    <color name="green">#6FCF97</color>
     <color name="app_background">#121212</color>
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColorSecondary">#B0B0B0</color>
     <color name="colorPrimary">@color/green</color>
-    <color name="colorOnPrimary">@color/black</color>
+    <color name="colorOnPrimary">@color/white</color>
     <color name="colorSurface">#1E1E1E</color>
     <color name="colorOnSurface">#FFFFFF</color>
     <color name="colorOnSurfaceVariant">#B0B0B0</color>
