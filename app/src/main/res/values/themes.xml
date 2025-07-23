@@ -2,19 +2,22 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.GDCreator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/user_message_bubble</item>
-        <item name="colorPrimaryVariant">@color/user_message_bubble</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/send_button_green</item>
         <item name="colorSecondaryVariant">@color/send_button_green</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:statusBarColor">?attr/colorSurface</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/app_background</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorSecondary">#B0B0B0</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
     </style>
 
     <style name="Theme.GDCreator" parent="Base.Theme.GDCreator" />

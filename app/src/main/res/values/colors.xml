@@ -10,12 +10,18 @@
     <color name="ocean_sage_green">#689a90</color>
 
     <!-- New Chat UI Colors -->
-    <color name="app_background">#121212</color>
+    <color name="app_background">#FFFFFF</color>
     <color name="user_message_bubble">#1F8EF1</color>
-    <color name="ai_message_bubble">#2D2D2D</color>
-    <color name="ai_message_text">#EAEAEA</color>
-    <color name="input_field_background">#1E1E1E</color>
+    <color name="ai_message_bubble">#F0F0F0</color>
+    <color name="ai_message_text">#000000</color>
+    <color name="input_field_background">#FFFFFF</color>
     <color name="send_button_green">#00C851</color>
+    <color name="textColorPrimary">#000000</color>
+    <color name="textColorSecondary">#666666</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorOnSurfaceVariant">#666666</color>
+    <color name="colorPrimary">#00FF7F</color>
 
 
 </resources>

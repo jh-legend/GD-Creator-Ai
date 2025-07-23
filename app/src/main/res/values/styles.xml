@@ -37,12 +37,19 @@
     <!-- EditText Style -->
     <style name="AppEditText" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/edittext_background_dark</item>
-        <item name="android:textColorHint">#B0B0B0</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:paddingStart">16dp</item>
         <item name="android:paddingEnd">16dp</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="ThemeAwareInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+        <item name="boxStrokeColor">?attr/colorPrimary</item>
+        <item name="boxBackgroundColor">?attr/colorSurface</item>
     </style>
 
 </resources>
