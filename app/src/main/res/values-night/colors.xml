@@ -11,4 +11,5 @@
     <color name="colorSurface">#1E1E1E</color>
     <color name="colorOnSurface">#FFFFFF</color>
     <color name="colorOnSurfaceVariant">#B0B0B0</color>
+    <color name="input_field_background">#1E1E1E</color>
 </resources>
