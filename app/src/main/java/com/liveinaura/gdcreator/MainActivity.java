@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment);
+                .findFragmentById(R.id.fragment_container);
         NavController navController = navHostFragment.getNavController();
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
     }
 }
