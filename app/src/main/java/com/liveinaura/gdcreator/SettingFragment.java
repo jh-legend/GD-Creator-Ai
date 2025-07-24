@@ -24,6 +24,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.liveinaura.gdcreator.utils.ThemeUtils;
 import com.liveinaura.gdcreator.LoginActivity;
 
+public class SettingFragment extends Fragment {
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView subscriptionStatusTextView;
