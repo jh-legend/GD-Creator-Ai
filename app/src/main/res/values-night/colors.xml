@@ -12,4 +12,6 @@
     <color name="colorOnSurface">#FFFFFF</color>
     <color name="colorOnSurfaceVariant">#B0B0B0</color>
     <color name="input_field_background">#1E1E1E</color>
+    <color name="user_message_bubble">#1F8EF1</color>
+    <color name="ai_message_bubble">#2D2D2D</color>
 </resources>
