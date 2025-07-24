@@ -32,9 +32,27 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
-        NavController navController = navHostFragment.getNavController();
-        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ChatFragment()).commit();
+        }
+
+        binding.bottomNavigation.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
+            if (itemId == R.id.chatFragment) {
+                selectedFragment = new ChatFragment();
+            } else if (itemId == R.id.docsFragment) {
+                selectedFragment = new DocsFragment();
+            } else if (itemId == R.id.settingFragment) {
+                selectedFragment = new SettingFragment();
+            }
+
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        selectedFragment).commit();
+            }
+            return true;
+        });
     }
 }
