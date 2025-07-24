@@ -8,6 +8,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.liveinaura.gdcreator.databinding.ActivityMainBinding;
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+            getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(),
                     new ChatFragment()).commit();
         }
 
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(),
                         selectedFragment).commit();
             }
             return true;
