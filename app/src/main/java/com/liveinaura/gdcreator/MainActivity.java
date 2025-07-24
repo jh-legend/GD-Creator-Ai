@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new ChatFragment()).commit();
         }
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         selectedFragment).commit();
             }
             return true;
