@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -21,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "OPENAI_API_KEY", "\"${project.properties.get("OPENAI_API_KEY")}\""
+        }
+        debug {
+            buildConfigField "String", "OPENAI_API_KEY", "\"${project.properties.get("OPENAI_API_KEY")}\""
         }
     }
     compileOptions {
@@ -50,11 +55,12 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:33.1.2')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-crashlytics'
 
     // Retrofit for OpenAI API
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     // iText for PDF generation
-    implementation 'com.itextpdf:itextg:5.5.10'
+    implementation 'com.itextpdf:itext7-core:7.1.15'
 }

@@ -84,8 +84,7 @@ public class SettingFragment extends Fragment {
                     .setTitle("Delete Your Data")
                     .setMessage("Do you want to request deletion of your account and all related data?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        // TODO: Trigger Firebase function to handle deletion request
-                        Toast.makeText(getContext(), "Deletion request sent.", Toast.LENGTH_SHORT).show();
+                        deleteUserData();
                     })
                     .setNegativeButton("No", null)
                     .show();
@@ -118,5 +117,25 @@ public class SettingFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private void deleteUserData() {
+        String userId = firebaseService.getCurrentUser().getUid();
+        firebaseService.deleteUserData(userId).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                firebaseService.getCurrentUser().delete().addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        Toast.makeText(getContext(), "Your data has been deleted.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getContext(), "Failed to delete your account.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                Toast.makeText(getContext(), "Failed to delete your data.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

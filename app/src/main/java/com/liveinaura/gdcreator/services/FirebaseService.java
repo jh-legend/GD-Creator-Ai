@@ -27,4 +27,8 @@ public class FirebaseService {
     public Task<Void> setUserData(User user) {
         return mDb.collection("users").document(getCurrentUser().getUid()).set(user);
     }
+
+    public Task<Void> deleteUserData(String userId) {
+        return mDb.collection("users").document(userId).delete();
+    }
 }
