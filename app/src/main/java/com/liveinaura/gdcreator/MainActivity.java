@@ -24,13 +24,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        try {
-            if (savedInstanceState == null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
-                        new ChatFragment()).commit();
-            }
-        } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                    new ChatFragment()).commit();
         }
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
@@ -40,14 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new ChatFragment();
             } else if (itemId == R.id.docsFragment) {
                 selectedFragment = new DocsFragment();
-            } else if (itemId == R.id.historyFragment) {
-                selectedFragment = new HistoryFragment();
             } else if (itemId == R.id.settingFragment) {
                 selectedFragment = new SettingFragment();
             }
 
             if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
                         selectedFragment).commit();
             }
             return true;

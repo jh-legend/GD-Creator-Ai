@@ -47,6 +47,8 @@ public class ChatFragment extends Fragment {
     private List<Message> messageList;
     private OpenAiApiService openAiApiService;
 
+    private static final String OPENAI_API_KEY = "Enter Chatgpt API here";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,9 +98,7 @@ public class ChatFragment extends Fragment {
     }
 
     private void sendMessage(String messageText) {
-        Message message = new Message(messageText, true);
-        messageList.add(message);
-        saveMessage(message);
+        messageList.add(new Message(messageText, true));
         chatAdapter.notifyItemInserted(messageList.size() - 1);
         chatRecyclerView.scrollToPosition(messageList.size() - 1);
         messageEditText.setText("");
@@ -120,27 +120,21 @@ public class ChatFragment extends Fragment {
                 500
         );
 
-        openAiApiService.getCompletion("Bearer " + BuildConfig.OPENAI_API_KEY, request).enqueue(new Callback<CompletionResponse>() {
+        openAiApiService.getCompletion("Bearer " + OPENAI_API_KEY, request).enqueue(new Callback<CompletionResponse>() {
             @Override
             public void onResponse(Call<CompletionResponse> call, Response<CompletionResponse> response) {
                 progressBar.setVisibility(View.GONE);
-                try {
-                    if (response.isSuccessful() && response.body() != null && !response.body().getChoices().isEmpty()) {
-                        String aiResponse = response.body().getChoices().get(0).getText().trim();
-                        Message message = new Message(aiResponse, false);
-                        messageList.add(message);
-                        saveMessage(message);
-                        chatAdapter.notifyItemInserted(messageList.size() - 1);
-                        chatRecyclerView.scrollToPosition(messageList.size() - 1);
-                        // Show the download button when the AI provides a response
-                        if (aiResponse.toLowerCase().contains("general diary")) {
-                            downloadButton.setVisibility(View.VISIBLE);
-                        }
-                    } else {
-                        Toast.makeText(getContext(), "Failed to get response from AI", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful() && response.body() != null && !response.body().getChoices().isEmpty()) {
+                    String aiResponse = response.body().getChoices().get(0).getText().trim();
+                    messageList.add(new Message(aiResponse, false));
+                    chatAdapter.notifyItemInserted(messageList.size() - 1);
+                    chatRecyclerView.scrollToPosition(messageList.size() - 1);
+                    // Show the download button when the AI provides a response
+                    if (aiResponse.toLowerCase().contains("general diary")) {
+                        downloadButton.setVisibility(View.VISIBLE);
                     }
-                } catch (Exception e) {
-                    FirebaseCrashlytics.getInstance().recordException(e);
+                } else {
+                    Toast.makeText(getContext(), "Failed to get response from AI", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -148,7 +142,6 @@ public class ChatFragment extends Fragment {
             public void onFailure(Call<CompletionResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                FirebaseCrashlytics.getInstance().recordException(t);
             }
         });
     }
@@ -163,11 +156,5 @@ public class ChatFragment extends Fragment {
                 Toast.makeText(getContext(), "Storage permission is required to download PDF", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private void saveMessage(Message message) {
-        String userId = mAuth.getCurrentUser().getUid();
-        db.collection("chats").document(userId).collection("messages")
-                .add(message);
     }
 }
