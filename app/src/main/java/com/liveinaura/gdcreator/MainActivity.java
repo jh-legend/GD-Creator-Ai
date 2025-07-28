@@ -3,25 +3,18 @@ package com.liveinaura.gdcreator;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.liveinaura.gdcreator.databinding.ActivityMainBinding;
 import com.liveinaura.gdcreator.utils.ThemeUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityMainBinding binding = null;
-        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
         super.onCreate(savedInstanceState);
         ThemeUtils.applyTheme(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -56,5 +49,9 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+    }
+
+    public BottomNavigationView getBottomNavigationView() {
+        return binding.bottomNavigation;
     }
 }
