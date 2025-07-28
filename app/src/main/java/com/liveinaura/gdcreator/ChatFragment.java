@@ -47,7 +47,7 @@ public class ChatFragment extends Fragment {
     private List<Message> messageList;
     private OpenAiApiService openAiApiService;
 
-    private static final String OPENAI_API_KEY = "Enter Chatgpt API here";
+    private static final String OPENAI_API_KEY = "YOUR OPEN API KEY";
 
     @Nullable
     @Override
@@ -129,6 +129,8 @@ public class ChatFragment extends Fragment {
                     messageList.add(new Message(aiResponse, false));
                     chatAdapter.notifyItemInserted(messageList.size() - 1);
                     chatRecyclerView.scrollToPosition(messageList.size() - 1);
+
+
                     // Show the download button when the AI provides a response
                     if (aiResponse.toLowerCase().contains("general diary")) {
                         downloadButton.setVisibility(View.VISIBLE);
