@@ -88,6 +88,19 @@ layout/activity_main.xml
 
 ---
 
+### ❌ Keyboard Overlapping UI
+
+**Problem:** `BottomNavigationView` remains visible and floats over the keyboard in `ChatFragment`.
+
+**Fix:**
+
+* Implemented `ViewTreeObserver.OnGlobalLayoutListener` in `ChatFragment` to detect keyboard visibility.
+* When the keyboard is open, the `BottomNavigationView` is hidden.
+* When the keyboard is closed, the `BottomNavigationView` is made visible again.
+* Exposed the `BottomNavigationView` from `MainActivity` for `ChatFragment` to access.
+
+---
+
 ## 🧩 Next Planned Features
 
 * [ ] Firebase Auth integration
