@@ -3,6 +3,7 @@ package com.liveinaura.gdcreator;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         ThemeUtils.applyTheme(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
