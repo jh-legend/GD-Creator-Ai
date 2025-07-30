@@ -2,13 +2,6 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.GDCreator" />
 
-    <!-- Splash Screen Theme. -->
-    <style name="Theme.GDCreator.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#FFFFFF</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.GDCreator</item>
-    </style>
-
     <!-- Button Styles -->
     <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">?attr/colorPrimary</item>

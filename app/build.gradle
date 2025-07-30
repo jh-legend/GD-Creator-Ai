@@ -58,8 +58,5 @@ dependencies {
     // iText for PDF generation
     implementation 'com.itextpdf:itext7-core:7.1.15'
 
-    // Splash screen
-    implementation 'androidx.core:core-splashscreen:1.0.1'
-
 
 }
