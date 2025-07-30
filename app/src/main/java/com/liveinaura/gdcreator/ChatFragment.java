@@ -1,5 +1,6 @@
 package com.liveinaura.gdcreator;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,19 +55,6 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
-
-        final View rootView = view.getRootView();
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            int heightDiff = rootView.getRootView().getHeight() - rootView.getHeight();
-            BottomNavigationView bottomNavigationView = ((MainActivity) getActivity()).getBottomNavigationView();
-            if (bottomNavigationView != null) {
-                if (heightDiff > 100) { // If keyboard is open
-                    bottomNavigationView.setVisibility(View.GONE);
-                } else { // If keyboard is closed
-                    bottomNavigationView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
         chatRecyclerView = view.findViewById(R.id.chatRecyclerView);
         messageEditText = view.findViewById(R.id.messageEditText);
