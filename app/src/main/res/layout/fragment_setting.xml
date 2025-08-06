@@ -18,13 +18,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Settings"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/green"
+            />
+
 
         <com.google.android.material.card.MaterialCardView
             style="@style/AppCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/green"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -48,6 +53,7 @@
                     android:layout_marginStart="16dp"
                     android:text="User Name"
                     android:textSize="18sp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toEndOf="@id/profileImageView"
                     app:layout_constraintTop_toTopOf="@id/profileImageView"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -58,6 +64,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:textColor="@color/black"
                     android:text="user.email@example.com"
                     app:layout_constraintStart_toEndOf="@id/profileImageView"
                     app:layout_constraintTop_toBottomOf="@id/nameTextView"
@@ -120,7 +127,9 @@
             style="@style/AppCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/green"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,9 +143,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dark Mode"
-                    android:textSize="16sp"
-                    app:thumbTint="@color/green"
-                    app:trackTint="@color/green"/>
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    app:thumbTint="@color/white"
+                    app:trackTint="@color/black"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -144,7 +154,10 @@
             style="@style/AppCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/green"
+
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -159,7 +172,9 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_lock"
                     android:drawablePadding="16dp"
-                    android:text="Privacy Policy" />
+                    android:text="Privacy Policy"
+                    android:textColor="@color/black"
+                    />
 
                 <View
                     android:layout_width="match_parent"
@@ -175,6 +190,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_mail"
                     android:drawablePadding="16dp"
+                    android:textColor="@color/black"
                     android:text="Contact Us" />
 
                 <View
@@ -191,6 +207,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_terms"
                     android:drawablePadding="16dp"
+                    android:textColor="@color/black"
                     android:text="Terms of Use" />
 
                 <View
@@ -218,9 +235,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/green"
             android:text="Logout"
-            android:textColor="@color/black"/>
+            android:textColor="?attr/colorError"/>
 
     </LinearLayout>
 
