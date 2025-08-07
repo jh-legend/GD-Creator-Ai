@@ -11,7 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.liveinaura.gdcreator.utils.ValidationUtils;
+import android.view.View;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -92,6 +94,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d("Lifecycle", "LoginActivity:onStart");
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            currentUser.reload().addOnCompleteListener(task -> {
+                if (currentUser.isEmailVerified()) {
+                    resendVerificationTextView.setVisibility(View.GONE);
+                } else {
+                    resendVerificationTextView.setVisibility(View.VISIBLE);
+                }
+            });
+        }
     }
 
     @Override

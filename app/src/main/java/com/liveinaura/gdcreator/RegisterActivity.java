@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,11 +79,16 @@ public class RegisterActivity extends AppCompatActivity {
                                                     .addOnCompleteListener(task2 -> {
                                                         if (task2.isSuccessful()) {
                                                             Log.d("Auth", "RegisterActivity: User data saved for uid: " + uid);
-                                                            Toast.makeText(RegisterActivity.this, "A verification link has been sent to your email. Please check and confirm it to activate your account.", Toast.LENGTH_LONG).show();
-                                                            mAuth.signOut();
-                                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                                            startActivity(intent);
-                                                            finish();
+                                                            new AlertDialog.Builder(RegisterActivity.this)
+                                                                    .setTitle("Verification Email Sent")
+                                                                    .setMessage("Verification email sent. Please verify and re-open the app to continue.")
+                                                                    .setPositiveButton("OK", (dialog, which) -> {
+                                                                        mAuth.signOut();
+                                                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                                        startActivity(intent);
+                                                                        finish();
+                                                                    })
+                                                                    .show();
                                                         } else {
                                                             Log.e("Auth", "RegisterActivity: Failed to save user data for uid: " + uid, task2.getException());
                                                             Toast.makeText(RegisterActivity.this, "Failed to save user data.",

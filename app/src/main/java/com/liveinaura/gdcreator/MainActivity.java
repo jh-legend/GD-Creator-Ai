@@ -3,6 +3,7 @@ package com.liveinaura.gdcreator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,12 +23,32 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if (FirebaseAuth.getInstance().getCurrentUser() == null || !FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
             return;
         }
+
+        auth.getCurrentUser().reload().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (auth.getCurrentUser().isEmailVerified()) {
+                    Log.d("Auth", "MainActivity: User is verified.");
+                } else {
+                    Log.d("Auth", "MainActivity: User is not verified.");
+                    Toast.makeText(MainActivity.this, "Please verify your email to continue.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            } else {
+                Log.e("Auth", "MainActivity: reload failed", task.getException());
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
