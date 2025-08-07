@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             if (!ValidationUtils.isValidPassword(password)) {
-                passwordEditText.setError("Password must be at least 6 characters with 2 numbers and 2 special characters.");
+                passwordEditText.setError("Password does not meet the requirements.");
                 Log.e("Auth", "RegisterActivity: Invalid password");
                 return;
             }
@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     .addOnCompleteListener(task2 -> {
                                                         if (task2.isSuccessful()) {
                                                             Log.d("Auth", "RegisterActivity: User data saved for uid: " + uid);
-                                                            Toast.makeText(RegisterActivity.this, "Registration successful. Please verify your email.", Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(RegisterActivity.this, "A verification link has been sent to your email. Please check and confirm it to activate your account.", Toast.LENGTH_LONG).show();
                                                             mAuth.signOut();
                                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                                             startActivity(intent);

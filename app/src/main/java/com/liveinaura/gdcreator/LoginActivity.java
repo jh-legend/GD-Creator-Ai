@@ -56,17 +56,10 @@ public class LoginActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
-                            if (mAuth.getCurrentUser().isEmailVerified()) {
-                                Log.d("Auth", "LoginActivity: Login successful for email: " + email);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                mAuth.signOut();
-                                Log.d("Auth", "LoginActivity: Email not verified for: " + email);
-                                Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
-                                resendVerificationTextView.setVisibility(TextView.VISIBLE);
-                            }
+                            Log.d("Auth", "LoginActivity: Login successful for email: " + email);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             Log.e("Auth", "LoginActivity: Login failed for email: " + email, task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",

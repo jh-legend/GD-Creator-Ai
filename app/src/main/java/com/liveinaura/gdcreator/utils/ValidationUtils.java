@@ -13,11 +13,24 @@ public class ValidationUtils {
     }
 
     public static boolean isValidPassword(final String password) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9]{2,})(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}).{6,}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-        return matcher.matches();
+        if (password == null || password.length() < 6) {
+            return false;
+        }
+
+        int upperCaseCount = 0;
+        int specialCharCount = 0;
+        int digitCount = 0;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                upperCaseCount++;
+            } else if (Character.isDigit(c)) {
+                digitCount++;
+            } else if (!Character.isLetterOrDigit(c)) {
+                specialCharCount++;
+            }
+        }
+
+        return upperCaseCount >= 1 && specialCharCount >= 2 && digitCount >= 2;
     }
 }
