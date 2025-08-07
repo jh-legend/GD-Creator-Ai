@@ -2,6 +2,7 @@ package com.liveinaura.gdcreator.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -12,10 +13,12 @@ public class ThemeUtils {
     public static void applyTheme(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         int theme = prefs.getInt(THEME_KEY, AppCompatDelegate.MODE_NIGHT_YES);
+        Log.d("Theme", "ThemeUtils:applyTheme - Applying theme: " + theme);
         AppCompatDelegate.setDefaultNightMode(theme);
     }
 
     public static void setTheme(Context context, int theme) {
+        Log.d("Theme", "ThemeUtils:setTheme - Setting theme: " + theme);
         SharedPreferences.Editor editor = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit();
         editor.putInt(THEME_KEY, theme);
         editor.apply();

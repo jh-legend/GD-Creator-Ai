@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class DocsFragment extends Fragment implements DocsAdapter.OnDocClickList
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("Docs", "DocsFragment:onCreateView");
         View view = inflater.inflate(R.layout.fragment_docs, container, false);
 
         docsRecyclerView = view.findViewById(R.id.docsRecyclerView);
@@ -58,6 +60,7 @@ public class DocsFragment extends Fragment implements DocsAdapter.OnDocClickList
     }
 
     private void loadDocuments() {
+        Log.d("Docs", "DocsFragment:loadDocuments - Loading documents...");
         docList.clear();
         File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "GD-Creator");
         if (directory.exists()) {
@@ -79,10 +82,12 @@ public class DocsFragment extends Fragment implements DocsAdapter.OnDocClickList
             docsRecyclerView.setVisibility(View.VISIBLE);
             docsAdapter.notifyDataSetChanged();
         }
+        Log.d("Docs", "DocsFragment:loadDocuments - " + docList.size() + " documents found.");
     }
 
     @Override
     public void onDocClick(Doc doc) {
+        Log.d("Docs", "DocsFragment:onDocClick - Opening document: " + doc.getName());
         File file = new File(doc.getPath());
         Uri uri = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", file);
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -91,6 +96,7 @@ public class DocsFragment extends Fragment implements DocsAdapter.OnDocClickList
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
+            Log.e("Docs", "DocsFragment:onDocClick - Failed to open PDF. No application found.", e);
             Toast.makeText(getContext(), "No application found to open PDF file", Toast.LENGTH_SHORT).show();
         }
     }

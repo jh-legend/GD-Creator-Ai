@@ -1,5 +1,7 @@
 package com.liveinaura.gdcreator.services;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,14 +23,17 @@ public class FirebaseService {
     }
 
     public Task<DocumentSnapshot> getUserData() {
+        Log.d("Firestore", "FirebaseService:getUserData for user: " + getCurrentUser().getUid());
         return mDb.collection("users").document(getCurrentUser().getUid()).get();
     }
 
     public Task<Void> setUserData(User user) {
+        Log.d("Firestore", "FirebaseService:setUserData for user: " + getCurrentUser().getUid());
         return mDb.collection("users").document(getCurrentUser().getUid()).set(user);
     }
 
     public Task<Void> deleteUserData(String userId) {
+        Log.d("Firestore", "FirebaseService:deleteUserData for user: " + userId);
         return mDb.collection("users").document(userId).delete();
     }
 }

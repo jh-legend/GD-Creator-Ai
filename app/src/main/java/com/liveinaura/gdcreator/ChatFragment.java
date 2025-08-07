@@ -2,6 +2,7 @@ package com.liveinaura.gdcreator;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class ChatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("Lifecycle", "ChatFragment:onCreateView");
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
         chatRecyclerView = view.findViewById(R.id.chatRecyclerView);
@@ -76,6 +78,7 @@ public class ChatFragment extends Fragment {
         });
 
         downloadButton.setOnClickListener(v -> {
+            Log.d("PDF", "ChatFragment:downloadButton.onClick - PDF generation triggered.");
             if (PermissionUtils.hasStoragePermission(getActivity())) {
                 try {
                     String gdText = "";
@@ -87,6 +90,7 @@ public class ChatFragment extends Fragment {
                     PdfGenerator.generatePdf(getContext(), gdText);
                     Toast.makeText(getContext(), "PDF downloaded successfully", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
+                    Log.e("PDF", "ChatFragment:downloadButton.onClick - Failed to generate PDF", e);
                     e.printStackTrace();
                     Toast.makeText(getContext(), "Failed to download PDF", Toast.LENGTH_SHORT).show();
                 }
@@ -98,12 +102,50 @@ public class ChatFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d("Lifecycle", "ChatFragment:onViewCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("Lifecycle", "ChatFragment:onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Lifecycle", "ChatFragment:onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("Lifecycle", "ChatFragment:onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("Lifecycle", "ChatFragment:onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("Lifecycle", "ChatFragment:onDestroyView");
+    }
+
     private void sendMessage(String messageText) {
         messageList.add(new Message(messageText, true));
         chatAdapter.notifyItemInserted(messageList.size() - 1);
         chatRecyclerView.scrollToPosition(messageList.size() - 1);
         messageEditText.setText("");
         progressBar.setVisibility(View.VISIBLE);
+
+        Log.d("OpenAI", "ChatFragment:sendMessage - Triggering OpenAI API call");
 
         // Create a prompt for the AI
         String prompt = "The user wants to file a General Diary (GD) in Bangladesh. " +
@@ -120,23 +162,32 @@ public class ChatFragment extends Fragment {
                 prompt,
                 500
         );
+        Log.d("OpenAI", "ChatFragment:sendMessage - Request Payload: " + request.toString());
 
         openAiApiService.getCompletion(request).enqueue(new Callback<CompletionResponse>() {
             @Override
             public void onResponse(Call<CompletionResponse> call, Response<CompletionResponse> response) {
                 progressBar.setVisibility(View.GONE);
+                Log.d("OpenAI", "ChatFragment:onResponse - Raw Response: " + response.raw().toString());
+                Log.d("AI_Response", "ChatFragment:onResponse - Received AI response. Processing...");
                 if (response.isSuccessful() && response.body() != null && !response.body().getChoices().isEmpty()) {
-                    String aiResponse = response.body().getChoices().get(0).getText().trim();
-                    messageList.add(new Message(aiResponse, false));
-                    chatAdapter.notifyItemInserted(messageList.size() - 1);
-                    chatRecyclerView.scrollToPosition(messageList.size() - 1);
+                    try {
+                        String aiResponse = response.body().getChoices().get(0).getText().trim();
+                        Log.d("AI_Response", "ChatFragment:onResponse - AI response parsed successfully. Response: " + aiResponse);
+                        messageList.add(new Message(aiResponse, false));
+                        chatAdapter.notifyItemInserted(messageList.size() - 1);
+                        chatRecyclerView.scrollToPosition(messageList.size() - 1);
+                        Log.d("AI_Response", "ChatFragment:onResponse - AI response rendered to UI.");
 
-
-                    // Show the download button when the AI provides a response
-                    if (aiResponse.toLowerCase().contains("general diary")) {
-                        downloadButton.setVisibility(View.VISIBLE);
+                        // Show the download button when the AI provides a response
+                        if (aiResponse.toLowerCase().contains("general diary")) {
+                            downloadButton.setVisibility(View.VISIBLE);
+                        }
+                    } catch (Exception e) {
+                        Log.e("AI_Response", "ChatFragment:onResponse - Error parsing or rendering AI response", e);
                     }
                 } else {
+                    Log.e("OpenAI", "ChatFragment:onResponse - Failed to get response from AI. Code: " + response.code() + ", Message: " + response.message());
                     Toast.makeText(getContext(), "Failed to get response from AI", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -144,6 +195,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void onFailure(Call<CompletionResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
+                Log.e("OpenAI", "ChatFragment:onFailure - API call failed", t);
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -2,6 +2,7 @@ package com.liveinaura.gdcreator.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -20,36 +21,43 @@ import java.io.OutputStream;
 
 public class PdfGenerator {
 
-    public static void generatePdf(Context context, String gdText) throws IOException {
-        // Step 1: Define file metadata
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.MediaColumns.DISPLAY_NAME, "GD_" + System.currentTimeMillis() + ".pdf");
-        values.put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
+    public static void generatePdf(Context context, String gdText) {
+        Log.d("PDF", "PdfGenerator:generatePdf - Starting PDF generation...");
+        Uri uri = null;
+        try {
+            // Step 1: Define file metadata
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.MediaColumns.DISPLAY_NAME, "GD_" + System.currentTimeMillis() + ".pdf");
+            values.put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            values.put(MediaStore.MediaColumns.RELATIVE_PATH, "Download/GD-Creator");
-        }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                values.put(MediaStore.MediaColumns.RELATIVE_PATH, "Download/GD-Creator");
+            }
 
-        // Step 2: Get Uri to write file
-        Uri uri = context.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
+            // Step 2: Get Uri to write file
+            uri = context.getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
 
-        // Step 3: Write PDF using iText7
-        try (OutputStream outputStream = context.getContentResolver().openOutputStream(uri)) {
-            PdfWriter writer = new PdfWriter(outputStream);
-            PdfDocument pdfDocument = new PdfDocument(writer);
-            Document document = new Document(pdfDocument);
+            // Step 3: Write PDF using iText7
+            try (OutputStream outputStream = context.getContentResolver().openOutputStream(uri)) {
+                PdfWriter writer = new PdfWriter(outputStream);
+                PdfDocument pdfDocument = new PdfDocument(writer);
+                Document document = new Document(pdfDocument);
 
-            // Step 4: Load Bengali font
-            PdfFont font = PdfFontFactory.createFont("assets/fonts/kalpurush.ttf", PdfEncodings.IDENTITY_H, true);
+                // Step 4: Load Bengali font
+                PdfFont font = PdfFontFactory.createFont("assets/fonts/kalpurush.ttf", PdfEncodings.IDENTITY_H, true);
 
-            // Step 5: Create paragraph and add to PDF
-            Paragraph paragraph = new Paragraph(gdText)
-                    .setFont(font)
-                    .setFontSize(12)
-                    .setTextAlignment(TextAlignment.JUSTIFIED);
+                // Step 5: Create paragraph and add to PDF
+                Paragraph paragraph = new Paragraph(gdText)
+                        .setFont(font)
+                        .setFontSize(12)
+                        .setTextAlignment(TextAlignment.JUSTIFIED);
 
-            document.add(paragraph);
-            document.close();
+                document.add(paragraph);
+                document.close();
+                Log.d("PDF", "PdfGenerator:generatePdf - PDF generated successfully. URI: " + uri);
+            }
+        } catch (IOException e) {
+            Log.e("PDF", "PdfGenerator:generatePdf - Failed to generate PDF", e);
         }
     }
 }

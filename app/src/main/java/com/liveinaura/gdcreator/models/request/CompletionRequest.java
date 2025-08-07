@@ -34,4 +34,12 @@ public class CompletionRequest {
     public void setMax_tokens(int max_tokens) {
         this.max_tokens = max_tokens;
     }
+
+    @Override
+    public String toString() {
+        return "CompletionRequest{" +
+                "model='" + model + '\'' +
+                ", max_tokens=" + max_tokens +
+                '}';
+    }
 }

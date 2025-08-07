@@ -2,6 +2,7 @@ package com.liveinaura.gdcreator;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class SettingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("UserProfile", "SettingFragment:onCreateView");
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
         nameTextView = view.findViewById(R.id.nameTextView);
@@ -100,6 +102,7 @@ public class SettingFragment extends Fragment {
     }
 
     private void loadUserData() {
+        Log.d("UserProfile", "SettingFragment:loadUserData - Loading user data...");
         if (firebaseService.getCurrentUser() != null) {
             firebaseService.getUserData().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -110,9 +113,11 @@ public class SettingFragment extends Fragment {
                             nameTextView.setText(user.getName());
                             emailTextView.setText(user.getEmail());
                             subscriptionStatusTextView.setText("Subscription Status: " + user.getSubscriptionStatus());
+                            Log.d("UserProfile", "SettingFragment:loadUserData - User data loaded and displayed for user: " + firebaseService.getCurrentUser().getUid());
                         }
                     }
                 } else {
+                    Log.e("UserProfile", "SettingFragment:loadUserData - Failed to load user data for user: " + firebaseService.getCurrentUser().getUid(), task.getException());
                     Toast.makeText(getContext(), "Failed to load user data.", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -121,19 +126,24 @@ public class SettingFragment extends Fragment {
 
     private void deleteUserData() {
         String userId = firebaseService.getCurrentUser().getUid();
+        Log.d("UserProfile", "SettingFragment:deleteUserData - Deleting user data for user: " + userId);
         firebaseService.deleteUserData(userId).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                Log.d("UserProfile", "SettingFragment:deleteUserData - User data deleted for user: " + userId);
                 firebaseService.getCurrentUser().delete().addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
+                        Log.d("UserProfile", "SettingFragment:deleteUserData - User account deleted for user: " + userId);
                         Toast.makeText(getContext(), "Your data has been deleted.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     } else {
+                        Log.e("UserProfile", "SettingFragment:deleteUserData - Failed to delete user account for user: " + userId, task1.getException());
                         Toast.makeText(getContext(), "Failed to delete your account.", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
+                Log.e("UserProfile", "SettingFragment:deleteUserData - Failed to delete user data for user: " + userId, task.getException());
                 Toast.makeText(getContext(), "Failed to delete your data.", Toast.LENGTH_SHORT).show();
             }
         });
