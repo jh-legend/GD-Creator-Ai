@@ -13,6 +13,7 @@ public class ApiClient {
         if (retrofit == null) {
 
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(new AuthenticationInterceptor())
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)

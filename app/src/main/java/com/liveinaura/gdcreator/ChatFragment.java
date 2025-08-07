@@ -49,7 +49,6 @@ public class ChatFragment extends Fragment {
     private List<Message> messageList;
     private OpenAiApiService openAiApiService;
 
-    private static final String OPENAI_API_KEY = "YOUR OPEN API KEY";
 
     @Nullable
     @Override
@@ -122,7 +121,7 @@ public class ChatFragment extends Fragment {
                 500
         );
 
-        openAiApiService.getCompletion("Bearer " + OPENAI_API_KEY, request).enqueue(new Callback<CompletionResponse>() {
+        openAiApiService.getCompletion(request).enqueue(new Callback<CompletionResponse>() {
             @Override
             public void onResponse(Call<CompletionResponse> call, Response<CompletionResponse> response) {
                 progressBar.setVisibility(View.GONE);

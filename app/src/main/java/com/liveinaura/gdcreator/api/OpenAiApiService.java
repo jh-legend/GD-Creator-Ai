@@ -11,7 +11,6 @@ import retrofit2.http.POST;
 public interface OpenAiApiService {
     @POST("completions")
     Call<CompletionResponse> getCompletion(
-            @Header("Authorization") String authorization,
             @Body CompletionRequest request
     );
 }
