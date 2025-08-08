@@ -158,7 +158,7 @@ public class ChatFragment extends Fragment {
 
 
         CompletionRequest request = new CompletionRequest(
-                "text-davinci-003",
+                "gpt-3.5-turbo",
                 prompt,
                 500
         );
@@ -187,7 +187,13 @@ public class ChatFragment extends Fragment {
                         Log.e("AI_Response", "ChatFragment:onResponse - Error parsing or rendering AI response", e);
                     }
                 } else {
-                    Log.e("OpenAI", "ChatFragment:onResponse - Failed to get response from AI. Code: " + response.code() + ", Message: " + response.message());
+                    String errorBody = "";
+                    try {
+                        errorBody = response.errorBody().string();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Log.e("OpenAI", "ChatFragment:onResponse - Failed to get response from AI. Code: " + response.code() + ", Message: " + response.message() + ", Error Body: " + errorBody);
                     Toast.makeText(getContext(), "Failed to get response from AI", Toast.LENGTH_SHORT).show();
                 }
             }
