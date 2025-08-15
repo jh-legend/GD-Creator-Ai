@@ -117,4 +117,37 @@ layout/activity_main.xml
 
 ---
 
-*Last updated: 2025-07-22*
+## 🚀 Recent Changes (August 2025)
+
+### 🔒 Secure API Key Handling & Comprehensive Logging
+
+**Problem:** The OpenAI API key was hardcoded and logging was insufficient for debugging.
+
+**Fix:**
+*   Implemented a secure way to handle the OpenAI API key by reading it from `local.properties` and making it available through `BuildConfig`.
+*   Added comprehensive logging throughout the application using consistent tags (`Auth`, `Firestore`, `OpenAI`, etc.) to facilitate debugging.
+*   Created a `LOGGING_GUIDE.md` to explain how to trace logs in Android Studio.
+
+### ⚙️ Improved Authentication Flow
+
+**Problem:** The login and registration flows needed improvement for better user experience.
+
+**Fix:**
+*   Updated the registration flow to show a more informative dialog after sending the verification email.
+*   Removed the email verification check from the login flow to allow users to log in immediately after registration.
+*   Added a password visibility toggle to the password fields in both the login and registration forms.
+*   Updated the password requirements UI and validation logic.
+
+### 🐛 OpenAI API Fix & Auto-Login
+
+**Problem:** The app was failing to get a response from the OpenAI API, and the user had to log in manually every time.
+
+**Fix:**
+*   Fixed the `build.gradle` configuration for the API key.
+*   Updated the OpenAI model from `text-davinci-003` to `gpt-3.5-turbo`.
+*   Enhanced error logging for API calls.
+*   Implemented an auto-login feature that automatically logs the user in after they verify their email address.
+
+---
+
+*Last updated: 2025-08-15*
