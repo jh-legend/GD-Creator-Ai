@@ -24,8 +24,9 @@ import com.liveinaura.gdcreator.adapters.ChatAdapter;
 import com.liveinaura.gdcreator.api.ApiClient;
 import com.liveinaura.gdcreator.api.OpenAiApiService;
 import com.liveinaura.gdcreator.models.Message;
-import com.liveinaura.gdcreator.models.request.CompletionRequest;
-import com.liveinaura.gdcreator.models.response.CompletionResponse;
+import com.liveinaura.gdcreator.models.request.chat.ChatCompletionRequest;
+import com.liveinaura.gdcreator.models.request.chat.ChatMessage;
+import com.liveinaura.gdcreator.models.response.chat.ChatCompletionResponse;
 import com.liveinaura.gdcreator.utils.PermissionUtils;
 import com.liveinaura.gdcreator.utils.PdfGenerator;
 import android.content.pm.PackageManager;
@@ -156,23 +157,25 @@ public class ChatFragment extends Fragment {
                 "and any other relevant details. After gathering all the information, " +
                 "generate a formal GD in Bengali.";
 
+        List<ChatMessage> messages = new ArrayList<>();
+        messages.add(new ChatMessage("user", prompt));
 
-        CompletionRequest request = new CompletionRequest(
-                "gpt-3.5-turbo",
-                prompt,
+        ChatCompletionRequest request = new ChatCompletionRequest(
+                "gpt-4.1-mini",
+                messages,
                 500
         );
-        Log.d("OpenAI", "ChatFragment:sendMessage - Request Payload: " + request.toString());
+        Log.d("OpenAI_REQUEST", request.toString());
 
-        openAiApiService.getCompletion(request).enqueue(new Callback<CompletionResponse>() {
+        openAiApiService.getChatCompletion(request).enqueue(new Callback<ChatCompletionResponse>() {
             @Override
-            public void onResponse(Call<CompletionResponse> call, Response<CompletionResponse> response) {
+            public void onResponse(Call<ChatCompletionResponse> call, Response<ChatCompletionResponse> response) {
                 progressBar.setVisibility(View.GONE);
                 Log.d("OpenAI", "ChatFragment:onResponse - Raw Response: " + response.raw().toString());
                 Log.d("AI_Response", "ChatFragment:onResponse - Received AI response. Processing...");
                 if (response.isSuccessful() && response.body() != null && !response.body().getChoices().isEmpty()) {
                     try {
-                        String aiResponse = response.body().getChoices().get(0).getText().trim();
+                        String aiResponse = response.body().getChoices().get(0).getMessage().getContent().trim();
                         Log.d("AI_Response", "ChatFragment:onResponse - AI response parsed successfully. Response: " + aiResponse);
                         messageList.add(new Message(aiResponse, false));
                         chatAdapter.notifyItemInserted(messageList.size() - 1);
@@ -199,7 +202,7 @@ public class ChatFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<CompletionResponse> call, Throwable t) {
+            public void onFailure(Call<ChatCompletionResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Log.e("OpenAI", "ChatFragment:onFailure - API call failed", t);
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();

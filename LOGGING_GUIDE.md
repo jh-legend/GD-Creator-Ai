@@ -66,7 +66,20 @@ Here is a list of all the tags we've used in this project:
 
 You can also combine filters. For example, to see only error logs for the `Auth` tag, you can select "Error" from the log level dropdown and type `tag:Auth` in the search bar.
 
-## 4. Clearing the Logcat
+## 4. Inspecting OpenAI API Requests
+
+To help with debugging the OpenAI API integration, we have added a specific log to view the request payload before it is sent.
+
+*   **Tag:** `OpenAI_REQUEST`
+*   **Purpose:** This log shows the exact JSON payload being sent to the OpenAI Chat Completions API. This is useful for verifying that the model, messages, and other parameters are being set correctly.
+
+**Example Log Line:**
+```
+D/OpenAI_REQUEST: ChatCompletionRequest{model='gpt-4.1-mini', messages=[...], max_tokens=500}
+```
+By inspecting this log, you can confirm that the app is sending the correct data to the API, which can help you rule out client-side issues when debugging API-related problems.
+
+## 5. Clearing the Logcat
 
 To clear all the logs from the Logcat window, you can click the "Clear Logcat" button (a trash can icon) on the left side of the Logcat window.
 
