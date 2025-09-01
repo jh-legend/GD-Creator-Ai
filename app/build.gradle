@@ -3,7 +3,10 @@ def getApiKey(key) {
     def localProperties = new File(rootDir, "local.properties")
     if (localProperties.exists()) {
         properties.load(new FileInputStream(localProperties))
-        return properties.getProperty(key)
+        def value = properties.getProperty(key)
+        if (value != null) {
+            return value.trim().replaceAll("^\"|\"$", "")
+        }
     }
     return ""
 }
